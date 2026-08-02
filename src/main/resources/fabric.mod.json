@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "health-indicator",
+	"version": "${version}",
+	"name": "Health Indicator",
+	"description": "Simple Health Indicator mod",
+	"authors": [
+		"Avie29"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/project/avies-health-indicator",
+		"sources": "https://github.com/FabricMC/fabric-example-mod",
+		"issues": "https://github.com/avie293/Avie-s-Health-Indicator/issues"
+	},
+	"license": "CC-BY-NC-4.0",
+	"icon": "assets/health-indicator/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.avie29.healthindicator.HealthIndicatorClient"
+		]
+	},
+	"mixins": [
+		"health-indicator.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.22",
+		"minecraft": "~1.20",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

@@ -1,0 +1,6 @@
+{
+  "category.healthindicator": "生命值显示",
+  "key.healthindicator.toggle": "切换生命值显示",
+  "message.healthindicator.enabled": "[生命值显示] 已启用",
+  "message.healthindicator.disabled": "[生命值显示] 已禁用"
+}

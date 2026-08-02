@@ -1,0 +1,6 @@
+{
+  "category.healthindicator": "Indicador de salud",
+  "key.healthindicator.toggle": "Alternar indicador de salud",
+  "message.healthindicator.enabled": "[Indicador de salud] Activado",
+  "message.healthindicator.disabled": "[Indicador de salud] Desactivado"
+}

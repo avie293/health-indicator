@@ -1,0 +1,6 @@
+{
+  "category.healthindicator": "Индикатор здоровья",
+  "key.healthindicator.toggle": "Переключить индикатор здоровья",
+  "message.healthindicator.enabled": "[Индикатор здоровья] Включен",
+  "message.healthindicator.disabled": "[Индикатор здоровья] Выключен"
+}

@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "com.avie29.healthindicator.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"PlayerNameTagMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

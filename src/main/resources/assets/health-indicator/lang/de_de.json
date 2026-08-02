@@ -1,0 +1,6 @@
+{
+  "category.healthindicator": "Gesundheitsanzeige",
+  "key.healthindicator.toggle": "Gesundheitsanzeige umschalten",
+  "message.healthindicator.enabled": "[Gesundheitsanzeige] Aktiviert",
+  "message.healthindicator.disabled": "[Gesundheitsanzeige] Deaktiviert"
+}
