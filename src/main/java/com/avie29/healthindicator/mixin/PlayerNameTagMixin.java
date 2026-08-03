@@ -20,10 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EntityRenderer.class)
 public abstract class PlayerNameTagMixin<T extends Entity> {
 
-	// Textures for 1.20 / 1.20.1 (Legacy texture atlas)
 	private static final Identifier ICONS_TEXTURE = new Identifier("textures/gui/icons.png");
 
-	// Textures for 1.20.2+ (GUI atlas sprites)
 	private static final Identifier GUI_ATLAS = new Identifier("textures/atlas/gui.png");
 	private static final Identifier HEART_CONTAINER = new Identifier("hud/heart/container");
 	private static final Identifier HEART_FULL = new Identifier("hud/heart/full");
@@ -38,7 +36,6 @@ public abstract class PlayerNameTagMixin<T extends Entity> {
 	private void renderHealthHearts(T entity, Text text, MatrixStack matrices,
 	                                VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
 
-		// Cancel rendering if mod is disabled via hotkey
 		if (!HealthIndicatorClient.enabled) return;
 
 		if (!(entity instanceof AbstractClientPlayerEntity player)) return;
@@ -77,11 +74,9 @@ public abstract class PlayerNameTagMixin<T extends Entity> {
 		int totalWidth = ((totalHeartsToDisplay - 1) * heartSpacing) + heartWidth;
 		int startX = -totalWidth / 2;
 
-		// Check whether we are running 1.20.2+ (GuiAtlasManager exists)
 		boolean isModernVersion = isModernAtlasSupported(client);
 
 		if (isModernVersion) {
-			// --- LOGIC FOR 1.20.2+ ---
 			Sprite containerSprite = client.getGuiAtlasManager().getSprite(HEART_CONTAINER);
 			Sprite fullSprite = client.getGuiAtlasManager().getSprite(HEART_FULL);
 			Sprite halfSprite = client.getGuiAtlasManager().getSprite(HEART_HALF);
@@ -96,7 +91,6 @@ public abstract class PlayerNameTagMixin<T extends Entity> {
 			renderModernHearts(matrix, buffer, startX, heartSpacing, totalHeartsToDisplay, maxBaseHearts, health, absorption, containerSprite, fullSprite, halfSprite, absorbFullSprite, absorbHalfSprite, 255);
 
 		} else {
-			// --- LEGACY LOGIC FOR 1.20 & 1.20.1 (sampled from icons.png) ---
 			if (!isSneaking) {
 				VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getTextSeeThrough(ICONS_TEXTURE));
 				renderLegacyHearts(matrix, buffer, startX, heartSpacing, totalHeartsToDisplay, maxBaseHearts, health, absorption, 64);
@@ -116,7 +110,6 @@ public abstract class PlayerNameTagMixin<T extends Entity> {
 		}
 	}
 
-	// Rendering for MC 1.20.2+ (Sprites)
 	private void renderModernHearts(Matrix4f matrix, VertexConsumer buffer, int startX, int heartSpacing,
 	                                int totalHeartsToDisplay, int maxBaseHearts, int health, int absorption,
 	                                Sprite containerSprite, Sprite fullSprite, Sprite halfSprite,
@@ -144,11 +137,9 @@ public abstract class PlayerNameTagMixin<T extends Entity> {
 		}
 	}
 
-	// Rendering for MC 1.20 & 1.20.1 (Exact UV mapping from icons.png)
 	private void renderLegacyHearts(Matrix4f matrix, VertexConsumer buffer, int startX, int heartSpacing,
 	                                int totalHeartsToDisplay, int maxBaseHearts, int health, int absorption, int alpha) {
 
-		// UV scale factor for icons.png (256x256 texture sheet)
 		float uTex = 1.0F / 256.0F;
 		float vTex = 1.0F / 256.0F;
 
@@ -156,24 +147,19 @@ public abstract class PlayerNameTagMixin<T extends Entity> {
 			int x = startX + (i * heartSpacing);
 			int heartValue = (i + 1) * 2;
 
-			// Heart container UV (16, 0)
 			drawSprite(matrix, buffer, 16 * uTex, 25 * uTex, 0 * vTex, 9 * vTex, x, 0, alpha);
 
 			if (i < maxBaseHearts) {
 				if (health >= heartValue) {
-					// Full heart UV (52, 0)
 					drawSprite(matrix, buffer, 52 * uTex, 61 * uTex, 0 * vTex, 9 * vTex, x, 0, alpha);
 				} else if (health == heartValue - 1) {
-					// Half heart UV (61, 0)
 					drawSprite(matrix, buffer, 61 * uTex, 70 * uTex, 0 * vTex, 9 * vTex, x, 0, alpha);
 				}
 			} else {
 				int absorbValue = (i - maxBaseHearts + 1) * 2;
 				if (absorption >= absorbValue) {
-					// Full absorption heart UV (160, 0)
 					drawSprite(matrix, buffer, 160 * uTex, 169 * uTex, 0 * vTex, 9 * vTex, x, 0, alpha);
 				} else if (absorption == absorbValue - 1) {
-					// Half absorption heart UV (169, 0)
 					drawSprite(matrix, buffer, 169 * uTex, 178 * uTex, 0 * vTex, 9 * vTex, x, 0, alpha);
 				}
 			}
